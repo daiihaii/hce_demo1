@@ -1,0 +1,110 @@
+/* RESET & Base */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
+  background-color: #fafafc;
+}
+
+/* Layout */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e5;
+}
+
+.header__logo .logoImg {
+  height: 60px;
+  object-fit: contain;
+}
+
+.header__nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.header__nav .nav__link {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.header__nav .nav__link:hover {
+  color: #007bb7; /* màu phụ có thể lấy từ Tiffany style */
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header__username {
+  font-size: 16px;
+  color: #555;
+}
+
+/* Buttons */
+.button {
+  padding: 8px 16px;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.button--login {
+  background-color: transparent;
+  color: #007bb7;
+  border: 1px solid #007bb7;
+}
+
+.button--login:hover {
+  background-color: #007bb7;
+  color: #fff;
+}
+
+.button--logout {
+  background-color: #007bb7;
+  color: #fff;
+}
+
+.button--logout:hover {
+  background-color: #005f8c;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 40px;
+  background-color: #fafafc;
+}
+
+/* Footer */
+.footer {
+  background-color: #ffffff;
+  border-top: 1px solid #e0e0e5;
+  text-align: center;
+  padding: 20px 40px;
+  font-size: 14px;
+  color: #777;
+}

@@ -1,68 +1,71 @@
-import "./assets/css/layout.css";
-import logo from "./assets/images/Ten-truong-do-1000x159.png";
-import { Outlet } from "react-router-dom";
+import "./assets/css/main.css";
+import anhlogo from "./assets/images/Ten-truong-do-1000x159.png";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Layout = () => {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/login");
+  };
+
   return (
-    <>
+    <div className="layout-container">
       {/* Header */}
-      <header>
-        <div id="header" className="header">
-          <div id="banner" className="banner">
-            <div id="divmenutrai">
-              <nav id="menutrai">
-                <ul className="menutrai" style={{ width: "250px" }}>
-                  <li>
-                    <a href="/" className="menutrai">
-                      TRANG CHU
-                    </a>
-                  </li>
-                  <li>
-                    <a className="menutrai" href="/trang1">
-                      EGOV
-                    </a>
-                  </li>
-                  <li>
-                    <a className="menutrai" href="/trang2">
-                      SINH VIEN
-                    </a>
-                  </li>
-                  <li>
-                    <a className="menutrai" href="/listsanpham">
-                      LIST SAN PHAM
-                    </a>
-                  </li>
-                  <li>
-                    <a className="menutrai" href="/listproduct">
-                      LISTPRODUCT
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-            <div style={{ width: "1000px" }}>
-              <img src={logo} width="500" height="80" alt="Logo" />
-            </div>
-            <div>Tim kiem</div>
-          </div>
-          <div id="menubar" className="menubar"></div>
+      <header className="header">
+        <div className="header__logo">
+          <img src={anhlogo} alt="Logo" className="logoImg" />
+        </div>
+        <nav className="header__nav">
+          <a href="/" className="nav__link">
+            Trang Chủ
+          </a>
+          <a href="/trang1" className="nav__link">
+            EGOV
+          </a>
+          <a href="/admin/products" className="nav__link">
+            Quản Trị
+          </a>
+        </nav>
+        <div className="header__actions">
+          {user ? (
+            <>
+              <span className="header__username">👤 {user.username}</span>
+              <button className="button button--logout" onClick={handleLogout}>
+                Đăng Xuất
+              </button>
+            </>
+          ) : (
+            <a href="/login" className="button button--login">
+              Đăng Nhập
+            </a>
+          )}
         </div>
       </header>
 
-      {/* Nội dung trang con */}
-      <main>
+      {/* Main Content */}
+      <main className="main-content">
         <Outlet />
       </main>
 
       {/* Footer */}
-      <footer>
-        <div
-          style={{ textAlign: "center", padding: "10px", background: "#eee" }}
-        >
-          &copy; 2025 - Trường đại học XYZ
+      <footer className="footer">
+        <div className="footer__inner">
+          © 2025 – Công Ty … | Mọi quyền được bảo lưu.
         </div>
       </footer>
-    </>
+    </div>
   );
 };
 
